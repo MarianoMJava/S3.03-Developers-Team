@@ -1,7 +1,8 @@
 package floristeriaApp;
 
+import java.io.Serializable;
 
-public class Arbol extends Producto{
+public class Arbol extends Producto implements Serializable{
 
 	 private double altura;
 
