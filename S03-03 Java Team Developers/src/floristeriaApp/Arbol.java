@@ -17,7 +17,7 @@ public class Arbol extends Producto implements Serializable{
 
 	    @Override
 	    public String toString() {
-	        return "Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Altura: " + altura;
+	        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Altura: " + altura;
 	    }
 	
 }

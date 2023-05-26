@@ -17,7 +17,7 @@ public class Flor extends Producto implements Serializable{
 
 	    @Override
 	    public String toString() {
-	        return "Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Color: " + color;
+	        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Color: " + color;
 	    }
 	
 }

@@ -17,7 +17,7 @@ public class Decoracion extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Material: " + material;
+        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Material: " + material;
     }
 
 }

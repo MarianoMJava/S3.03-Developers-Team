@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Floristeria implements Serializable {
 
 	private String nombre;
@@ -40,7 +39,7 @@ public class Floristeria implements Serializable {
 
 		arboles.add(arbol);
 		valorTotal += arbol.getPrecio();
-		
+
 	}
 
 	public void agregarFlor(Flor flor) {
@@ -63,10 +62,15 @@ public class Floristeria implements Serializable {
 
 		Boolean encontrado = false;
 
-		for (int i = 0; i < this.arboles.size(); i++) {
-			if (arbolBuscar.equals(this.arboles.get(i))) {
-				this.arboles.remove(this.arboles.get(i));
+		for (int i = 0; i < this.arboles.size() && encontrado == false; i++) {
+
+			if (arbolBuscar.getNombre().equals(this.arboles.get(i).getNombre())
+					&& arbolBuscar.getAltura() == this.arboles.get(i).getAltura()) {
+
 				valorTotal -= this.arboles.get(i).getPrecio();
+
+				this.arboles.remove(this.arboles.get(i));
+
 				encontrado = true;
 			}
 		}
@@ -83,10 +87,14 @@ public class Floristeria implements Serializable {
 
 		Boolean encontrado = false;
 
-		for (int i = 0; i < flores.size() && encontrado == false; i++) {
-			if (florBuscar.equals(flores.get(i))) {
-				flores.remove(flores.get(i));
-				valorTotal -= flores.get(i).getPrecio();
+		for (int i = 0; i < this.flores.size() && encontrado == false; i++) {
+
+			if (florBuscar.getNombre().equals(this.flores.get(i).getNombre())
+					&& florBuscar.getColor().equals(this.flores.get(i).getColor())) {
+
+				valorTotal -= this.flores.get(i).getPrecio();
+				this.flores.remove(this.flores.get(i));
+
 				encontrado = true;
 			}
 		}
@@ -102,10 +110,14 @@ public class Floristeria implements Serializable {
 
 		Boolean encontrado = false;
 
-		for (int i = 0; i < decoraciones.size() && encontrado == false; i++) {
-			if (decoracionBuscar.equals(decoraciones.get(i))) {
-				decoraciones.remove(decoraciones.get(i));
-				valorTotal -= decoraciones.get(i).getPrecio();
+		for (int i = 0; i < this.decoraciones.size() && encontrado == false; i++) {
+
+			if (decoracionBuscar.getNombre().equals(this.decoraciones.get(i).getNombre())
+					&& decoracionBuscar.getMaterial().equals(this.decoraciones.get(i).getMaterial())) {
+
+				valorTotal -= this.decoraciones.get(i).getPrecio();
+				this.decoraciones.remove(this.decoraciones.get(i));
+
 				encontrado = true;
 			}
 		}
@@ -117,19 +129,16 @@ public class Floristeria implements Serializable {
 		}
 	}
 
+	
+	
 	// MOSTRAR
 
 	public void mostrarStock() {
 
 		Scanner sc = new Scanner(System.in);
 
-		/*String nombreFloristeria;
-
-		System.out.println("Ingrese el nombre de la floristeria que quiere ver stock: ");
-		nombreFloristeria = sc.nextLine();*/
-	
-
 		try {
+
 			FileInputStream fileIn = new FileInputStream(this.nombre + ".txt");
 			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 			Floristeria floristeriaMostrar = (Floristeria) objectIn.readObject();
@@ -138,7 +147,7 @@ public class Floristeria implements Serializable {
 
 			objectIn.close();
 			fileIn.close();
-			
+
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("Error al cargar el estado de la floristería: " + e.getMessage());
 		}
@@ -146,9 +155,9 @@ public class Floristeria implements Serializable {
 
 	public void mostrarStockConCantidades() {
 		System.out.println("Stock de la floristería:");
-		System.out.println("Árboles: " + arboles.size() +" unidades");
-		System.out.println("Flores: " + flores.size()+" unidades");
-		System.out.println("Decoraciones: " + decoraciones.size()+" unidades");
+		System.out.println("Árboles: " + arboles.size() + " unidades");
+		System.out.println("Flores: " + flores.size() + " unidades");
+		System.out.println("Decoraciones: " + decoraciones.size() + " unidades");
 	}
 
 	public void mostrarValorTotal() {
@@ -180,11 +189,11 @@ public class Floristeria implements Serializable {
 		}
 		return ganancias;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Floristeria [nombre=" + nombre + ", arboles=" + arboles + ", flores=" + flores + ", decoraciones="
-				+ decoraciones + ", valorTotal=" + valorTotal + "]";
+		return "Floristeria\n" + nombre + "\nArboles " + arboles + "\nFlores=" + flores + "\nDecoraciones "
+				+ decoraciones + "\nValor Total=" + valorTotal;
 	}
 
 	public String getNombre() {
