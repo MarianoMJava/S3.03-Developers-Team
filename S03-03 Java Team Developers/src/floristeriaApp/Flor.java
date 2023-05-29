@@ -1,6 +1,8 @@
 package floristeriaApp;
 
-public class Flor extends Producto{
+import java.io.Serializable;
+
+public class Flor extends Producto implements Serializable{
 
 	   private String color;
 
@@ -15,7 +17,7 @@ public class Flor extends Producto{
 
 	    @Override
 	    public String toString() {
-	        return "Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Color: " + color;
+	        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Color: " + color;
 	    }
 	
 }
