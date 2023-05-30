@@ -1,10 +1,8 @@
 package floristeriaApp;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,7 +53,7 @@ public class Main {
 			case 9:
 				mostrarValorTotal(floristeria);
 				break;
-			case 10:
+			/*case 10:
 				crearTicketCompra(scanner, floristeria);
 				break;
 			case 11:
@@ -64,7 +62,7 @@ public class Main {
 			case 12:
 				mostrarGananciasTotales();
 				break;
-
+*/
 			case 13:
 				SerializarGuardar.serializar(floristeria);
 				floristeria = crearCargarFloristeria(scanner);
@@ -219,9 +217,9 @@ public class Main {
 		}
 	}
 
-	private static void retirarArbol(Scanner scanner, Floristeria floristeria, Arbol arbolCompra) {
+	private static void retirarArbol(Scanner scanner, Floristeria floristeria) {
 
-		if(arbolCompra==null) {
+
 		System.out.println("Nombre de arbol a retirar: ");
 		String nombre = scanner.nextLine();
 		System.out.println("Precio arbol: ");
@@ -231,10 +229,7 @@ public class Main {
 
 		Arbol arbolBuscar = new Arbol(nombre, precio, altura);
 		floristeria.retirarArbol(arbolBuscar);
-		}else {
-			floristeria.retirarArbol(arbolCompra);
-		}
-	
+
 		SerializarGuardar.serializar(floristeria);
 
 	}
@@ -293,7 +288,7 @@ public class Main {
 		}
 	}
 
-	private static void crearTicketCompra(Scanner scanner, Floristeria floristeria) {
+	/*private static void crearTicketCompra(Scanner scanner, Floristeria floristeria) {
 
 		List<Producto> productosCompra = new ArrayList<>();
 		List<Ticket> comprasAntiguas = new ArrayList<>();
@@ -332,7 +327,7 @@ public class Main {
 		System.out.println("Ticket de compra:");
 		ticket.mostrarTicket();
 	}
-
+*/
 	private static void mostrarComprasAntiguas(List<Ticket> comprasAntiguas) {
 		System.out.println("Compras antiguas:");
 		for (Ticket ticket : comprasAntiguas) {
