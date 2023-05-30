@@ -18,12 +18,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Floristeria implements Serializable {
-
-	private String nombre;
 	private List<Arbol> arboles;
 	private List<Flor> flores;
 	private List<Decoracion> decoraciones;
 	private double valorTotal;
+	private String nombre;
+	public List<Arbol> getArboles() {
+		return arboles;
+	}
+	public void setArboles(List<Arbol> arboles) {
+		this.arboles = arboles;
+	}
+ 
+	public void setFlores(List<Flor> flores) {
+		this.flores = flores;
+	}
+ 
+	public void setDecoraciones(List<Decoracion> decoraciones) {
+		this.decoraciones = decoraciones;
+	}
+
+
 
 	public Floristeria(String nombre) {
 		this.nombre = nombre;
@@ -34,7 +49,11 @@ public class Floristeria implements Serializable {
 
 	}
 	// AGREGAR
-
+	public  List<Arbol>  getArbol(){
+		return arboles;
+	}
+	
+	
 	public void agregarArbol(Arbol arbol) {
 
 		arboles.add(arbol);
@@ -149,13 +168,13 @@ public class Floristeria implements Serializable {
 			fileIn.close();
 
 		} catch (IOException | ClassNotFoundException e) {
-			System.out.println("Error al cargar el estado de la floristería: " + e.getMessage());
+			System.out.println("Error al cargar el estado de la floristerÃ­a: " + e.getMessage());
 		}
 	}
 
 	public void mostrarStockConCantidades() {
-		System.out.println("Stock de la floristería:");
-		System.out.println("Árboles: " + arboles.size() + " unidades");
+		System.out.println("Stock de la floristerÃ­a:");
+		System.out.println("Ã�rboles: " + arboles.size() + " unidades");
 		System.out.println("Flores: " + flores.size() + " unidades");
 		System.out.println("Decoraciones: " + decoraciones.size() + " unidades");
 	}
@@ -189,7 +208,17 @@ public class Floristeria implements Serializable {
 		}
 		return ganancias;
 	}
-
+    public Producto buscarProducto(String nombre, double precio ) {
+    	System.out.println("floristeria.BuscarProducto " + nombre + " " + precio);
+    	Producto p = null;
+    	for(Producto producto:  arboles) {
+    		System.out.println("mis arboles :  " + producto.getNombre());
+    		if( producto.getNombre().equals(nombre) ) {
+    			p = producto;
+    		};
+    	}
+    	return p;
+    }
 	@Override
 	public String toString() {
 		return "Floristeria\n" + nombre + "\nArboles " + arboles + "\nFlores=" + flores + "\nDecoraciones "
@@ -203,5 +232,5 @@ public class Floristeria implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-}
+ 
+ }
