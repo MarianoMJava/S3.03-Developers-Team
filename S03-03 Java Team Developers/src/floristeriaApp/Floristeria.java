@@ -19,6 +19,19 @@ import java.util.Scanner;
 
 public class Floristeria implements Serializable {
 	private List<Arbol> arboles;
+	public double getValorTotal() {
+		return valorTotal;
+	}
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	public List<Flor> getFlores() {
+		return flores;
+	}
+	public List<Decoracion> getDecoraciones() {
+		return decoraciones;
+	}
+
 	private List<Flor> flores;
 	private List<Decoracion> decoraciones;
 	private double valorTotal;

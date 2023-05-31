@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Main2 {
 
 	public Main2() {
@@ -17,7 +16,7 @@ public class Main2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
  
-		System.out.println("Iniciando Bienvenido ");
+ 
 		Scanner scanner = new Scanner(System.in);
 
 		Floristeria floristeria = crearCargarFloristeria(scanner);
@@ -25,20 +24,13 @@ public class Main2 {
 		System.out.println( floristeria.getNombre());
 		//
 		// Declararamos Objecto persitencia lectura/escritura   ficheros
-		//
-		Persistencia  f2 = new Persistencia( floristeria.getNombre() );
  
+		Persistencia  f2 = new Persistencia( floristeria.getNombre() );
+  		
 		// Leemos los arboles creados en el fichero  y lo inyectamos en la floristeria 
 		
 		floristeria.setArboles( f2.LeerArbol());
-		
-
-		// idem flores 
-		
-		
-		// idem decoracion
-		
-		
+ 
 		
 		while (!salir) {
 			mostrarMenu();
@@ -82,7 +74,7 @@ public class Main2 {
 			case 10:
 				crearTicketCompra(scanner, floristeria);
 				break;
-			case 11:
+			case 11:	
 //				mostrarComprasAntiguas();
 				System.out.println("hola1");
 				break;
@@ -93,9 +85,10 @@ public class Main2 {
 			case 13:
 				SerializarGuardar.serializar(floristeria);
 //				floristeria = crearCargarFloristeria(scanner);
-				System.out.println("grabando persistencia ");
- 
+
 				f2.GrabarArbol(floristeria.getArbol());
+				f2.GrabarFlor(floristeria.getFlores());
+				f2.GrabarDecoracion(floristeria.getDecoraciones());
 				f2.LeerArbol();		
  
 				break;
