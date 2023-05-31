@@ -27,9 +27,10 @@ public class Main2 {
  
 		Persistencia  f2 = new Persistencia( floristeria.getNombre() );
   		
-		// Leemos los arboles creados en el fichero  y lo inyectamos en la floristeria 
 		
 		floristeria.setArboles( f2.LeerArbol());
+		floristeria.setFlores( f2.LeerFlor());
+		floristeria.setDecoraciones(f2.LeerDecoracion());
  
 		
 		while (!salir) {

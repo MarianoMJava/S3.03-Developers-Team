@@ -75,50 +75,81 @@ public class Persistencia {
   }
 public  List<Arbol>  LeerArbol() {
 		System.out.println("leyendo archivos ");
-		
-		
         List<Arbol>  arbol1 =   new ArrayList<>();
 	    try (BufferedReader bf1 = new BufferedReader(new FileReader(arbolfile ))) {
-	      String linea1 = "";
-	      String linea2 = "";
 
+	      String linea1 = "";
           linea1 = bf1.readLine();	      
 	      while ( linea1 != null  ) {
+	    	  String[] camposlinea  = linea1.split(";");
+	    	  
+	    	  String nombre = camposlinea[0];
+	    	  double precio  =  Double.parseDouble(camposlinea[1]);    
+	    	  double altura  =  Double.parseDouble(camposlinea[2]);    
 
-	      String[] camposlinea  = linea1.split(";");
-	      
-	      
-	      
-
-	      
-	      for ( int a = 0; a < camposlinea.length; a++) {
-		    	  System.out.println(camposlinea[a]);
-	      }		
-	      
-	      
-	      String nombre = camposlinea[0];
-		  double precio  =  Double.parseDouble(camposlinea[1]);    
-		  double altura  =  Double.parseDouble(camposlinea[2]);    
-		  Arbol a =  new Arbol(nombre , precio, altura );
-		  
-		  
-		  arbol1.add(a);
-	      linea1 = bf1.readLine();
-	      
-
+	    	  Arbol a =  new Arbol(nombre , precio, altura );
+	    	  arbol1.add(a);
+	    	  linea1 = bf1.readLine();
 	    
-	    }}
+	      }
+	    }
 	    catch (IOException ioe) {
 	      System.out.println("Se ha producido un error de lectura/escritura");
 	      System.err.println(ioe.getMessage());
 	    }
-	    
-	    
-	    for (Arbol a : arbol1) {
-	    	System.out.println( a.getNombre());
-	    }
-	    
+ 
 	    return arbol1;
+} 
+public  List<Flor>  LeerFlor() {
+ 
+    List<Flor>  flor =   new ArrayList<>();
+    try (BufferedReader bf1 = new BufferedReader(new FileReader(florfile ))) {
+      String linea1 = "";
+      linea1 = bf1.readLine();	      
+      while ( linea1 != null  ) {
+    	  String[] camposlinea  = linea1.split(";");
+
+    	  String nombre = camposlinea[0];
+    	  String color  = camposlinea[1];    
+    	  double precio =  Double.parseDouble(camposlinea[2]);    
+
+    	  flor.add(  new Flor(nombre ,  precio,color ));
+    	  linea1 = bf1.readLine();
+    
+      }
+    }
+    catch (IOException ioe) {
+      System.out.println("Se ha producido un error de lectura/escritura");
+      System.err.println(ioe.getMessage());
+    }
+
+    return  flor;
+}
+
+public  List<Decoracion>  LeerDecoracion() {
+	 
+    List<Decoracion>  decoracion =   new ArrayList<>();
+    try (BufferedReader bf1 = new BufferedReader(new FileReader(decoracionfile ))) {
+      String linea1 = "";
+      linea1 = bf1.readLine();	      
+      while ( linea1 != null  ) {
+    	  String[] camposlinea  = linea1.split(";");
+
+    	  String nombre = camposlinea[0];
+    	  String material = camposlinea[1];    
+    	  double precio =  Double.parseDouble(camposlinea[2]);    
+
+    	  decoracion.add(  new Decoracion(nombre , precio, material ));
+    	  linea1 = bf1.readLine();
+    
+      }
+    }
+    catch (IOException ioe) {
+      System.out.println("Se ha producido un error de lectura/escritura");
+      System.err.println(ioe.getMessage());
+    }
+
+    return  decoracion;
 } 
 }
 

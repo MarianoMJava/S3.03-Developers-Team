@@ -18,7 +18,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Floristeria implements Serializable {
+
 	private List<Arbol> arboles;
+	private List<Flor> flores;
+	private List<Decoracion> decoraciones;
+	private double valorTotal;
+	private String nombre;
+
 	public double getValorTotal() {
 		return valorTotal;
 	}
@@ -32,10 +38,6 @@ public class Floristeria implements Serializable {
 		return decoraciones;
 	}
 
-	private List<Flor> flores;
-	private List<Decoracion> decoraciones;
-	private double valorTotal;
-	private String nombre;
 	public List<Arbol> getArboles() {
 		return arboles;
 	}
