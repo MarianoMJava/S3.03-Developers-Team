@@ -6,8 +6,8 @@ public class Decoracion extends Producto implements Serializable {
 	
 	private String material;
 
-    public Decoracion(String nombre, double precio, String material) {
-        super(nombre, precio);
+    public Decoracion(String nombre, double precio, String material, int cantidad) {
+        super(nombre, precio, getContadorId(), cantidad);
         this.material = material;
     }
 
@@ -17,7 +17,7 @@ public class Decoracion extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Material: " + material;
+        return "\nId: "+getCantidad()+" Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Material: " + material;
     }
 
 }

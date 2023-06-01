@@ -6,8 +6,8 @@ public class Flor extends Producto implements Serializable{
 
 	   private String color;
 
-	    public Flor(String nombre, double precio, String color) {
-	        super(nombre, precio);
+	    public Flor(String nombre, double precio, String color, int cantidad) {
+	        super(nombre, precio, getContadorId(), cantidad);
 	        this.color = color;
 	    }
 
@@ -17,7 +17,7 @@ public class Flor extends Producto implements Serializable{
 
 	    @Override
 	    public String toString() {
-	        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Color: " + color;
+	        return "\nId: "+getCantidad()+" Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Color: " + color;
 	    }
 	
 }
