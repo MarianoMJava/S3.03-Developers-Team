@@ -1,5 +1,5 @@
 package floristeriaApp;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +30,7 @@ public class Main2 {
  
 		// Leemos los arboles creados en el fichero  y lo inyectamos en la floristeria 
 		
-		floristeria.setArboles( f2.LeerArbol());
+		floristeria.setArboles(f2.LeerArbol());
 		
 
 		// idem flores 
@@ -64,8 +64,7 @@ public class Main2 {
 				mostrarStock(floristeria);
 				break;
 			case 5:
-//				retirarArbol(scanner, floristeria);
-				System.out.println("hola1");
+				retirarArbol(scanner, floristeria);
 				break;
 			case 6:
 				retirarFlor(scanner, floristeria);
@@ -148,7 +147,7 @@ public class Main2 {
 
 		Floristeria floristeria = new Floristeria(nombre);
 
-		if (existeFloristeria == true) {
+		if (existeFloristeria) {
 
 			try {
 				FileInputStream fileIn = new FileInputStream(nombre + ".txt");
@@ -186,7 +185,10 @@ public class Main2 {
 		System.out.println("Introduce la altura del Ã¡rbol: ");
 		double altura = scanner.nextDouble();
 
-		Arbol arbol = new Arbol(nombre, precio, altura);
+		System.out.println("Introduce la cantidad de estos arboles: ");
+		int cantidad = scanner.nextInt();
+
+		Arbol arbol = new Arbol(nombre, precio, altura, cantidad);
 
 		floristeria.agregarArbol(arbol);
 
@@ -208,7 +210,10 @@ public class Main2 {
 		System.out.println("Introduce el color de la flor: ");
 		String color = scanner.next();
 
-		Flor flor = new Flor(nombre, precio, color);
+		System.out.println("Introduce la cantidad de estas flores: ");
+		int cantidad = scanner.nextInt();
+
+		Flor flor = new Flor(nombre, precio, color, cantidad);
 
 		floristeria.agregarFlor(flor);
 
@@ -230,7 +235,10 @@ public class Main2 {
 		System.out.println("Introduce el material de la decoraciÃ³n (madera o plÃ¡stico): ");
 		String material = scanner.next();
 
-		Decoracion decoracion = new Decoracion(nombre, precio, material);
+		System.out.println("Introduce la cantidad de estas decoraciones: ");
+		int cantidad = scanner.nextInt();
+
+		Decoracion decoracion = new Decoracion(nombre, precio, material, cantidad);
 
 		floristeria.agregarDecoracion(decoracion);
 
@@ -250,51 +258,41 @@ public class Main2 {
 		}
 	}
 
-	private static void retirarArbol(Scanner scanner, Floristeria floristeria, Arbol arbolCompra) {
+	private static void retirarArbol(Scanner scanner, Floristeria floristeria) {
 
-		if(arbolCompra==null) {
-		System.out.println("Nombre de arbol a retirar: ");
-		String nombre = scanner.nextLine();
-		System.out.println("Precio arbol: ");
-		double precio = scanner.nextDouble();
-		System.out.println("Altura arbol: ");
-		double altura = scanner.nextDouble();
+		mostrarStock(floristeria);
 
-		Arbol arbolBuscar = new Arbol(nombre, precio, altura);
-		floristeria.retirarArbol(arbolBuscar);
-		}else {
-			floristeria.retirarArbol(arbolCompra);
-		}
-	
+		System.out.println("Ingrese el id del producto a retirar: ");
+		int idRetirar = scanner.nextInt();
+
+		floristeria.retirarArbol(idRetirar);
+
 		SerializarGuardar.serializar(floristeria);
 
 	}
 
 	private static void retirarFlor(Scanner scanner, Floristeria floristeria) {
 
-		System.out.println("Nombre de la flor a retirar: ");
-		String nombre = scanner.nextLine();
-		System.out.println("Precio flor: ");
-		double precio = scanner.nextDouble();
-		System.out.println("Color flor: ");
-		String color = scanner.nextLine();
-		Flor florBuscar = new Flor(nombre, precio, color);
+		mostrarStock(floristeria);
 
-		floristeria.retirarFlor(florBuscar);
+		System.out.println("Ingrese el id del producto a retirar: ");
+		int idRetirar = scanner.nextInt();
+
+		floristeria.retirarFlor(idRetirar);
+
 		SerializarGuardar.serializar(floristeria);
+
 	}
 
 	private static void retirarDecoracion(Scanner scanner, Floristeria floristeria) {
 
-		System.out.println("Nombre de la decoracion a retirar: ");
-		String nombre = scanner.nextLine();
-		System.out.println("Precio decoracion: ");
-		double precio = scanner.nextDouble();
-		System.out.println("Material decoracion: ");
-		String material = scanner.nextLine();
-		Decoracion decoracionBuscar = new Decoracion(nombre, precio, material);
+		mostrarStock(floristeria);
 
-		floristeria.retirarDecoracion(decoracionBuscar);
+		System.out.println("Ingrese el id del producto a retirar: ");
+		int idRetirar = scanner.nextInt();
+
+		floristeria.retirarDecoracion(idRetirar);
+
 		SerializarGuardar.serializar(floristeria);
 	}
 

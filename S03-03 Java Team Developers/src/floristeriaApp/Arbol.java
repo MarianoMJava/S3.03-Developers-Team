@@ -6,8 +6,8 @@ public class Arbol extends Producto implements Serializable{
 
 	 private double altura;
 
-	    public Arbol(String nombre, double precio, double altura) {
-	        super(nombre, precio);
+	    public Arbol(String nombre, double precio, double altura, int cantidad) {
+	        super(nombre, precio, getContadorId() , cantidad);
 	        this.altura = altura;
 	    }
 
@@ -17,7 +17,7 @@ public class Arbol extends Producto implements Serializable{
 
 	    @Override
 	    public String toString() {
-	        return "\nNombre: " + getNombre() + ", Precio: " + getPrecio() + ", Altura: " + altura;
+	        return "\nId: "+getCantidad()+"Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Altura: " + altura;
 	    }
 	
 }

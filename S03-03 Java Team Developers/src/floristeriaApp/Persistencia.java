@@ -67,8 +67,9 @@ public  List<Arbol>  LeerArbol() {
 	      
 	      String nombre = camposlinea[0];
 		  double precio  =  Double.parseDouble(camposlinea[1]);    
-		  double altura  =  Double.parseDouble(camposlinea[2]);    
-		  Arbol a =  new Arbol(nombre , precio, altura );
+		  double altura  =  Double.parseDouble(camposlinea[2]);
+		  int cantidad = Integer.parseInt(camposlinea[3]);
+		  Arbol a =  new Arbol(nombre , precio, altura, cantidad );
 		  
 		  
 		  arbol1.add(a);
