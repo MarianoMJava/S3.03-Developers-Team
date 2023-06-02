@@ -27,11 +27,17 @@ public class Floristeria implements Serializable {
     public void setFlores(List<Flor> flores) {
         this.flores = flores;
     }
-
+    
+    public List<Flor>  getFlores() {
+        return  flores;
+    }
+    
     public void setDecoraciones(List<Decoracion> decoraciones) {
         this.decoraciones = decoraciones;
     }
-
+    public List<Decoracion>  getDecoraciones() {
+        return decoraciones;
+    }
     public Floristeria(String nombre) {
         this.nombre = nombre;
         this.arboles = new ArrayList<>();
@@ -132,7 +138,7 @@ public class Floristeria implements Serializable {
         if (Producto.getContadorId() <= idRetirar) {
 
             valorTotal -= this.arboles.get(idRetirar).getPrecio();
-
+            
             System.out.print("Ingrese cantidad a retirar de " + arboles.get(idRetirar).getNombre() + " :");
             int cantidadRetirar = sc.nextInt();
             this.decoraciones.get(idRetirar).setCantidad(this.decoraciones.get(idRetirar).getCantidad() - cantidadRetirar);
@@ -174,8 +180,8 @@ public class Floristeria implements Serializable {
     }
 
     public void mostrarStockConCantidades() {
-        System.out.println("Stock de la floristerÃ­a:");
-        System.out.println("Ã�rboles: " + arboles.size() + " unidades");
+        System.out.println("Stock de la floristeria:");
+        System.out.println("Arboles: " + arboles.size() + " unidades");
         System.out.println("Flores: " + flores.size() + " unidades");
         System.out.println("Decoraciones: " + decoraciones.size() + " unidades");
     }

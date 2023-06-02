@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("Iniciando Bienvenido ");
+		System.out.println("Iniciando Bienvenido. Finde  ");
 		Scanner scanner = new Scanner(System.in);
 
 		Floristeria floristeria = crearCargarFloristeria(scanner);
@@ -20,17 +20,13 @@ public class Main {
 		//
 		// Declararamos Objecto persitencia lectura/escritura   ficheros
 		//
-		Persistencia  f2 = new Persistencia( floristeria.getNombre() );
+		Persistencia  persistencia = new Persistencia( floristeria.getNombre() );
 
 		// Leemos los arboles creados en el fichero  y lo inyectamos en la floristeria
 
-		floristeria.setArboles(f2.LeerArbol());
-
-
-		// idem flores
-
-
-		// idem decoracion
+		floristeria.setArboles( persistencia.LeerArbol());
+		floristeria.setFlores( persistencia.LeerFlor());
+		floristeria.setDecoraciones(persistencia.LeerDecoracion());
 
 
 
@@ -86,10 +82,12 @@ public class Main {
 				case 13:
 					SerializarGuardar.serializar(floristeria);
 //				floristeria = crearCargarFloristeria(scanner);
-					System.out.println("grabando persistencia ");
-
-					f2.GrabarArbol(floristeria.getArbol());
-					f2.LeerArbol();
+ 
+ 
+					persistencia.GrabarArbol(floristeria.getArboles());
+					persistencia.GrabarFlor(floristeria.getFlores());
+					persistencia.GrabarDecoracion(floristeria.getDecoraciones());
+					persistencia.LeerArbol();		
 
 					break;
 				case 14:
