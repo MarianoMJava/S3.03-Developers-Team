@@ -2,18 +2,32 @@ package floristeriaApp;
 
 import java.io.Serializable;
 
+ 
+
+ 
 public class Producto implements Serializable {
 
     private String nombre;
     private double precio;
     private static int contadorId = 0;
     private int cantidad;
+    private int id = 0;
+    public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+ 
     public Producto(String nombre, double precio, int contadorId, int cantidad) {
         this.nombre = nombre;
         this.precio = precio;
-        contadorId += 1;
+
         this.cantidad = cantidad;
+        this.id = contadorId;
+        
     }
 
     public String getNombre() {
@@ -24,7 +38,7 @@ public class Producto implements Serializable {
         return precio;
     }
 
-    public static int getContadorId() {  return contadorId;  }
+    public static int getContadorId() {         contadorId += 1; return contadorId;  }
 
     public int getCantidad() {  return cantidad;  }
 
@@ -32,5 +46,3 @@ public class Producto implements Serializable {
         this.cantidad = cantidad;
     }
 }
-
-

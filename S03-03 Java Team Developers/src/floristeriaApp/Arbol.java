@@ -3,7 +3,7 @@ package floristeriaApp;
 import java.io.Serializable;
 
 public class Arbol extends Producto implements Serializable{
-     private int  id;
+
 	 private double altura;
 
 	    public Arbol(String nombre, double precio, double altura, int cantidad) {

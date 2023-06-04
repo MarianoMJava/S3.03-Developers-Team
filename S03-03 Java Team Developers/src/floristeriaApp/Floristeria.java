@@ -15,7 +15,7 @@ public class Floristeria implements Serializable {
     private List<Decoracion> decoraciones;
     private double valorTotal;
     private String nombre;
-
+	MensajesFloristeria  mensajesFloristeria = new MensajesFloristeria();
     public List<Arbol> getArboles() {
         return arboles;
     }
@@ -215,7 +215,7 @@ public class Floristeria implements Serializable {
         }
         return ganancias;
     }
-
+    
     public Producto buscarProducto(String nombre, double precio) {
         System.out.println("floristeria.BuscarProducto " + nombre + " " + precio);
         Producto p = null;
@@ -228,7 +228,87 @@ public class Floristeria implements Serializable {
         return p;
     }
 
-    @Override
+    public MensajesFloristeria buscarProductoId(int productoID ,int productoCant ) {
+//        private List<Arbol> arboles;
+//        private List<Flor> flores;
+//        private List<Decoracion> decoraciones;
+
+    	String mensaje = "KO";
+    	mensajesFloristeria.setMensaje("");
+    	mensajesFloristeria.setCodigoerrores(0);
+    	
+        System.out.println("floristeria BuscarProducto por id ----> " + productoID);
+        Producto productoTicket = null;
+
+        
+        for (Producto producto : arboles) {
+            System.out.println("mis arboles :  " + producto.getId() );
+            if (producto.getId() ==  productoID ) {
+            	mensaje = this.Validaciones(producto, productoCant);
+            }
+        }
+        for (Producto producto : flores) {
+            if (producto.getId() ==  productoID ) {
+            	mensaje = this.Validaciones(producto, productoCant);
+            }
+        }
+        for (Producto producto : decoraciones ) {
+            if (producto.getId() ==  productoID ) {
+            	mensaje = this.Validaciones(producto, productoCant);
+            }
+        }
+        if ( mensaje  == "KO" ) {
+        	mensajesFloristeria.setMensaje("producto no encontrado.Liste el Stock para ver el catalogo disponible");
+        	mensajesFloristeria.setCodigoerrores(1);
+        }
+        return mensajesFloristeria;
+    }
+    
+    public String  Validaciones(Producto producto, int cantidades) {
+    	String mensajes = "";        
+    	if ( producto.getCantidad()  == 0 ) {
+        	mensajesFloristeria.setMensaje("Disculpe actualmente no hay stock de este producto.");
+        	mensajesFloristeria.setCodigoerrores(2);
+
+        }
+        if ( producto.getCantidad() <  cantidades ) {
+        	mensajesFloristeria.setMensaje("Solo tenemos " +  producto.getCantidad() + " disponibles en Stock");
+        	mensajesFloristeria.setCodigoerrores(3);
+   
+        }
+        if ( producto.getCantidad() >=  cantidades ) {
+        	mensajes =  "OK";
+
+        }
+		return mensajes;
+      }
+    
+    public Producto AñadirTickedProductoId(int Id ,int cantidades ) {
+//      private List<Arbol> arboles;
+//      private List<Flor> flores;
+//      private List<Decoracion> decoraciones;
+
+  	String mensaje = "KO";
+  	mensajesFloristeria.setMensaje("");
+  	mensajesFloristeria.setCodigoerrores(0);
+  	
+      System.out.println("floristeria BuscarProducto por id ----> " + Id);
+      Producto productoTicket = null;
+
+ 
+      
+      for (Producto producto : arboles) {
+          System.out.println("mis arboles :  " + producto.getId() );
+          if (producto.getId() == Id ) {
+ 
+              System.out.println(" encontrado  " + Id + producto.getCantidad() );
+              producto.setCantidad( producto.getCantidad() - cantidades );
+              productoTicket = new Producto(producto.getNombre(), producto.getPrecio(),producto.getId() , cantidades ); 
+          }
+      }
+      
+      return productoTicket;
+  }  
     public String toString() {
         return "Floristeria\n" + nombre + "\nArboles " + arboles + "\nFlores=" + flores + "\nDecoraciones "
                 + decoraciones + "\nValor Total=" + valorTotal;
