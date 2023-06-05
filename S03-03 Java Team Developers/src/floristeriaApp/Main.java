@@ -37,7 +37,6 @@ public class Main {
 		
 		while (!salir) {
 			mostrarMenu();
-
 			int opcion = scanner.nextInt();
 			scanner.nextLine(); // Limpiar el buffer del scanner
 
@@ -337,7 +336,7 @@ public class Main {
 						System.out.println("Cantidad  producto: ");
 						productoCantidad = scanner.nextInt();
 					}
-					if (productoID  == 0   ) {
+					if (productoID  == 0   )	{
 						agregarProductos = false;
 		
 					} else {
@@ -345,8 +344,8 @@ public class Main {
 						 mensajesFloristeria =  floristeria.buscarProductoId(productoID, productoCantidad);
 		 
 						if ( mensajesFloristeria.getCodigoerrores() == 0 ) {
-						 productoTicket  =  floristeria.AñadirTickedProductoId(productoID, productoCantidad);
-							productosCompra.add(productoTicket); 
+						    productoTicket  =  floristeria.AñadirTickedProductoId(productoID, productoCantidad);
+				  			productosCompra.add(productoTicket); 
 							System.out.println("Producto aÃƒÂ±adido al carrito de compra.");
 						} else {
 							System.out.println(" Error  n : " + mensajesFloristeria.getCodigoerrores());
