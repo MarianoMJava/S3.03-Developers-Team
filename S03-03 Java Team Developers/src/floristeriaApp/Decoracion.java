@@ -2,12 +2,12 @@ package floristeriaApp;
 
 import java.io.Serializable;
 
-public class Decoracion extends Producto implements Serializable {
+public class Decoracion extends Producto{
 	
 	private String material;
 
     public Decoracion(String nombre, double precio, String material, int cantidad) {
-        super(nombre, precio, getContadorId(), cantidad);
+        super(nombre, precio, cantidad);
         this.material = material;
     }
 
@@ -17,7 +17,7 @@ public class Decoracion extends Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "\nId: "+getCantidad()+" Nombre: " + getNombre() + ", Precio: " + getPrecio() + ", Material: " + material;
+        return "\nId: "+getId()+" / Nombre: " + getNombre() + " / Precio: " + getPrecio() + " / Material: " + material +" / Cantidad Stock: "+getCantidad();
     }
 
 }

@@ -1,33 +1,27 @@
 package floristeriaApp;
 
-import java.io.Serializable;
-
- 
-
- 
-public class Producto implements Serializable {
+public class Producto {
 
     private String nombre;
     private double precio;
     private static int contadorId = 0;
     private int cantidad;
-    private int id = 0;
-    public int getId() {
-		return id;
-	}
+    private int id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
- 
-    public Producto(String nombre, double precio, int contadorId, int cantidad) {
+    public Producto(String nombre, double precio, int cantidad) {
         this.nombre = nombre;
         this.precio = precio;
-
         this.cantidad = cantidad;
-        this.id = contadorId;
-        
+        this.id =generarIdUnico();
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -37,12 +31,20 @@ public class Producto implements Serializable {
     public double getPrecio() {
         return precio;
     }
-
-    public static int getContadorId() {         contadorId += 1; return contadorId;  }
-
-    public int getCantidad() {  return cantidad;  }
+/*
+    public static int getContadorId() {
+        return contadorId;
+    }
+*/
+    public int getCantidad() {
+        return cantidad;
+    }
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    private static synchronized int generarIdUnico(){
+        return contadorId++;
     }
 }
