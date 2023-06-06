@@ -199,7 +199,8 @@ public class Persistencia {
 			    	  precio 	    =  Double.parseDouble(camposlinea[1]);    
 			      	  cantidad    	=  Integer.parseInt(camposlinea[2]);   
 			      	  productoId    =  Integer.parseInt(camposlinea[3]);
-			      	  Producto p  = new Producto(nombre, precio, productoId, cantidad);
+//			      	  Producto p  = new Producto(nombre, precio, productoId, cantidad);
+ 			      	  Producto p  = new Producto(nombre, precio,  cantidad);
 			      	  producto.add(p);
 		      	  }
  

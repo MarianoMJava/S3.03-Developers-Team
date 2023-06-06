@@ -338,15 +338,18 @@ public class Floristeria implements Serializable {
 	        	    mensaje = "OK";
 	        	    // *** Actualizamos el Stock ***
  	        	  	arboles.get(i).setCantidad( arboles.get(i).getCantidad() - productoCant    );
-	                productoTicket = new Producto(arboles.get(i).getNombre(), arboles.get(i).getPrecio() , arboles.get(i).getId() , productoCant  ); 
-	          }	
+//	                productoTicket = new Producto(arboles.get(i).getNombre(), arboles.get(i).getPrecio() , arboles.get(i).getId() , productoCant  ); 
+	                productoTicket = new Producto(arboles.get(i).getNombre(), arboles.get(i).getPrecio() , productoCant  ); 
+
+ 	          }	
 	    }
 	    for (int i=0;i<flores.size() && mensaje.equals("KO");i++ ) {
 	          if (flores.get(i).getId() ==  productoID ) {
 	        	   mensaje = "OK";
           	       // *** Actualizamos el Stock ***
 	        	  flores.get(i).setCantidad( flores.get(i).getCantidad() - productoCant   );
-	              productoTicket = new Producto(flores.get(i).getNombre(), flores.get(i).getPrecio() , flores.get(i).getId() , productoCant  ); 
+	              productoTicket = new Producto(flores.get(i).getNombre(), flores.get(i).getPrecio() , productoCant  ); 
+//	        	  productoTicket = new Producto(flores.get(i).getNombre(), flores.get(i).getPrecio() , flores.get(i).getId() , productoCant  ); 
 	          }
 	    }
 	    for (int i=0;i<decoraciones.size() && mensaje.equals("KO") ;i++ ) {
@@ -354,7 +357,9 @@ public class Floristeria implements Serializable {
 	        	  mensaje = "OK";
 	        	  // *** Actualizamos el Stock ***
 	        	  decoraciones.get(i).setCantidad( decoraciones.get(i).getCantidad() - productoCant   );
-                  productoTicket = new Producto(decoraciones.get(i).getNombre(), decoraciones.get(i).getPrecio() , decoraciones.get(i).getId() , productoCant ); 
+//                  productoTicket = new Producto(decoraciones.get(i).getNombre(), decoraciones.get(i).getPrecio() , decoraciones.get(i).getId() , productoCant ); 
+                  productoTicket = new Producto(decoraciones.get(i).getNombre(), decoraciones.get(i).getPrecio() ,  productoCant ); 
+
 	          }
 	    }
  
