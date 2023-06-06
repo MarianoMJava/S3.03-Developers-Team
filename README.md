@@ -32,3 +32,20 @@ Printar por pantalla valor total de la floristería.
 Crear tickets de compra con múltiples objetos.
 Mostrar una lista de compras antiguas.
 Visualizar el total de dinero ganado con todas las ventas.
+
+
+Configuración Versión 1.0: 
+
+La aplicación solicitara un nombre de floristeria y a partir de ahi crearemos los ficheros de la aplicacion que son :
+
+	- name + "arbol.txt"      --> los arboles introducidos en la aplicación.
+	- name + "flores.txt"     --> Idem para flores.
+	- name + "decoracion.txt" --> Idem para decoraciones
+	- name + "tickets.txt"    --> Los tickes creado por la aplicación
+
+Se grabarán en el directorio raiz de la aplicación.
+
+
+
+
+
