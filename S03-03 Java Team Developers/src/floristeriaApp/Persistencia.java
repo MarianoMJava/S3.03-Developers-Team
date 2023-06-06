@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Persistencia {
 	private static String arbolfile;
 	private static String florfile;
@@ -240,8 +239,3 @@ public class Persistencia {
 	}
 	
 	}
-
-
-
-
- 

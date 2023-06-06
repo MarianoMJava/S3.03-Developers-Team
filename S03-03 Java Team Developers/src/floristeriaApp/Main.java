@@ -1,13 +1,12 @@
 package floristeriaApp;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+ 
 	
 	static  List<Ticket> comprasAntiguas = new ArrayList<>();
 	public static void main(String[] args) {
@@ -95,8 +94,8 @@ public class Main {
 						System.out.println("Saliendo...");
 						break;
 					default:
-						System.out.println("OpciÃƒÂ³n invÃƒÂ¡lida. Introduce un nÃƒÂºmero del 1 al 14.");
-						break;
+            System.out.println("Opcion invalida. Introduce un numero del 1 al 14.");
+            break;
 						
 					}
 					
@@ -105,60 +104,51 @@ public class Main {
 			}
 			
 			
-			private static void mostrarMenu() {
-				System.out.println("----- MenÃƒÂº -----");
-				System.out.println("0. Crear/Cargar floristeria");
-				System.out.println("1. AÃƒÂ±adir Ãƒï¿½rbol");
-				System.out.println("2. AÃƒÂ±adir Flor");
-				System.out.println("3. AÃƒÂ±adir DecoraciÃƒÂ³n");
-				System.out.println("4. Mostrar Stock");
-				System.out.println("5. Retirar Ãƒï¿½rbol");
-				System.out.println("6. Retirar Flor");
-				System.out.println("7. Retirar DecoraciÃƒÂ³n");
-				System.out.println("8. Mostrar Stock con Cantidades");
-				System.out.println("9. Mostrar Valor Total");
-				System.out.println("10. Crear Ticket de Compra");
-				System.out.println("11. Mostrar Compras Antiguas");
-				System.out.println("12. Mostrar Ganancias Totales");
-				System.out.println("13. Guardar (Para registrar cambios y cambiar de floristeria)");
-				System.out.println("14. Salir");
-				System.out.println("Elige una opciÃƒÂ³n: ");
-			}
+    private static void mostrarMenu() {
+        System.out.println("----- Menu -----");
+        System.out.println("0. Crear/Cargar floristeria");
+        System.out.println("1. Anadir Arbol");
+        System.out.println("2. Anadir Flor");
+        System.out.println("3. Anadir Decoracion");
+        System.out.println("4. Mostrar Stock");
+        System.out.println("5. Retirar Arbol");
+        System.out.println("6. Retirar Flor");
+        System.out.println("7. Retirar Decoracion");
+        System.out.println("8. Mostrar Stock con Cantidades");
+        System.out.println("9. Mostrar Valor Total");
+        System.out.println("10. Crear Ticket de Compra");
+        System.out.println("11. Mostrar Compras Antiguas");
+        System.out.println("12. Mostrar Ganancias Totales");
+        System.out.println("13. Guardar (Para registrar cambios y cambiar de floristeria)");
+        System.out.println("14. Salir");
+        System.out.println("Elige una opcion: ");
+    }
 			
-			public  static Floristeria crearCargarFloristeria(Scanner scanner) {
-				
-				String nombre;
-				
-				Boolean existeFloristeria = null;
-				
-				System.out.print("Ingrese el nombre de la floristeria: ");
-				
-				nombre = scanner.nextLine();
-				
-				existeFloristeria = ComprobarExistencia.comprobarFloristeria(nombre);
-				
-				Floristeria floristeria = new Floristeria(nombre);
-				
-				if (existeFloristeria) {
-					
-					try {
-						FileInputStream fileIn = new FileInputStream(nombre + ".txt");
-						ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-						floristeria = (Floristeria) objectIn.readObject();
-						
-						objectIn.close();
-						fileIn.close();
-						
-						System.out.println("La floristerÃƒÂ­a ha sido cargado correctamente.");
-					} catch (IOException | ClassNotFoundException e) {
-						System.out.println("Error al cargar el estado de la floristerÃƒÂ­a: " + e.getMessage());
-					}
-				}
-				
-				return floristeria;
-				
-			}
-			
+
+		    public static Floristeria crearCargarFloristeria(Scanner scanner) {
+
+            String nombre;
+
+            Boolean existeFloristeria = null;
+
+            System.out.print("Ingrese el nombre de la floristeria: ");
+
+            nombre = scanner.nextLine();
+
+            existeFloristeria = ComprobarExistencia.comprobarFloristeria(nombre);
+
+            Floristeria floristeria = new Floristeria(nombre);
+
+            if (existeFloristeria) {
+
+                System.out.println("La floristeria ha sido cargado correctamente.");
+
+            }
+
+            return floristeria;
+
+    }
+	
 			
 			private static void agregarArbol(Scanner scanner, Floristeria floristeria) {
 				
@@ -314,11 +304,7 @@ public class Main {
 				}
 			}
 			
-			/**
-			 * @param scanner
-			 * @param floristeria
-			 * @return
-			 */
+ 
 			public  static Ticket  crearTicketCompra(Scanner scanner, Floristeria floristeria) {
  
 				List<Producto> productosCompra = new ArrayList<>();
@@ -382,5 +368,4 @@ public class Main {
 
 		System.out.println("Ganancias totales: " + gananciasTotales);
 	}
-
 }
