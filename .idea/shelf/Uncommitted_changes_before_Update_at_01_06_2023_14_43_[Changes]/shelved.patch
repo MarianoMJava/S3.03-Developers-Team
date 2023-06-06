@@ -1,0 +1,37 @@
+Index: S03-03 Java Team Developers/src/floristeriaApp/Persistencia.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package floristeriaApp;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.BufferedWriter;\r\nimport java.io.FileReader;\r\nimport java.io.FileWriter;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class Persistencia {\r\n\tprivate static String arbolfile;\r\n\tpublic Persistencia(String nombre) {\r\n\t\t\r\n\t\tthis.arbolfile   = nombre + \"a.txt\";\r\n\t\t\r\n\t}\r\n\r\n\r\n\r\n  public static void GrabarArbol( List<Arbol>  arbol ) {\r\n   \r\n\t  \r\n    try {\r\n \r\n      BufferedWriter bw = new BufferedWriter(new FileWriter(arbolfile) );\r\n \r\n      \r\n      for( Arbol a : arbol ) {\r\n    \t  \r\n    \t  System.out.println(a.toString());\r\n    \t  \r\n          bw.write( a.getNombre() + \";\" + a.getPrecio() + \";\" + a.getAltura() + \"\\n\");\r\n      }\r\n   \r\n      bw.close();\r\n    \r\n    } catch (IOException ioe) {\r\n      System.out.println(\"Se ha producido un error de lectura/escritura\");\r\n      System.err.println(ioe.getMessage());\r\n    }\r\n  }\r\n \r\n\r\npublic  List<Arbol>  LeerArbol() {\r\n\t\tSystem.out.println(\"leyendo archivos \");\r\n\t\t\r\n\t\t\r\n        List<Arbol>  arbol1 =   new ArrayList<>();\r\n\t    try (BufferedReader bf1 = new BufferedReader(new FileReader(arbolfile ))) {\r\n\t      String linea1 = \"\";\r\n\t      String linea2 = \"\";\r\n\r\n          linea1 = bf1.readLine();\t      \r\n\t      while ( linea1 != null  ) {\r\n\r\n\t      String[] camposlinea  = linea1.split(\";\");\r\n\t      \r\n\t      \r\n\t      \r\n\r\n\t      \r\n\t      for ( int a = 0; a < camposlinea.length; a++) {\r\n\t\t    \t  System.out.println(camposlinea[a]);\r\n\t      }\t\t\r\n\t      \r\n\t      \r\n\t      String nombre = camposlinea[0];\r\n\t\t  double precio  =  Double.parseDouble(camposlinea[1]);    \r\n\t\t  double altura  =  Double.parseDouble(camposlinea[2]);\r\n\t\t  int cantidad = Integer.parseInt(camposlinea[3]);\r\n\t\t  Arbol a =  new Arbol(nombre , precio, altura, cantidad );\r\n\t\t  \r\n\t\t  \r\n\t\t  arbol1.add(a);\r\n\t      linea1 = bf1.readLine();\r\n\t      \r\n\r\n\t    \r\n\t    }}\r\n\t    catch (IOException ioe) {\r\n\t      System.out.println(\"Se ha producido un error de lectura/escritura\");\r\n\t      System.err.println(ioe.getMessage());\r\n\t    }\r\n\t    \r\n\t    \r\n\t    for (Arbol a : arbol1) {\r\n\t    \tSystem.out.println( a.getNombre());\r\n\t    }\r\n\t    \r\n\t    return arbol1;\r\n} \r\n}\r\n\r\n\r\n 
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/S03-03 Java Team Developers/src/floristeriaApp/Persistencia.java b/S03-03 Java Team Developers/src/floristeriaApp/Persistencia.java
+--- a/S03-03 Java Team Developers/src/floristeriaApp/Persistencia.java	(revision 0a7d4ddd91d949a5bd18dd9f124c3af41394bc8e)
++++ b/S03-03 Java Team Developers/src/floristeriaApp/Persistencia.java	(date 1685609043203)
+@@ -16,15 +16,11 @@
+ 		
+ 	}
+ 
+-
+-
+   public static void GrabarArbol( List<Arbol>  arbol ) {
+-   
+-	  
++
+     try {
+  
+       BufferedWriter bw = new BufferedWriter(new FileWriter(arbolfile) );
+- 
+       
+       for( Arbol a : arbol ) {
+     	  
+@@ -55,9 +51,6 @@
+ 	      while ( linea1 != null  ) {
+ 
+ 	      String[] camposlinea  = linea1.split(";");
+-	      
+-	      
+-	      
+ 
+ 	      
+ 	      for ( int a = 0; a < camposlinea.length; a++) {
