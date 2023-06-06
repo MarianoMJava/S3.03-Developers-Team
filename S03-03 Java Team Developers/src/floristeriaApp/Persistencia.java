@@ -2,6 +2,7 @@ package floristeriaApp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,8 +33,7 @@ public class Persistencia {
 	      BufferedWriter bw = new BufferedWriter(new FileWriter(arbolfile) );
 	     
 	      for( Arbol a : arbol ) {
-	    	  System.out.println(a.toString());
-	          bw.write(  a.getNombre() + ";"  + a.getAltura() + ";" +  a.getPrecio() + ";" + a.getCantidad() + ";" + a.getId() +  "\n");
+ 	          bw.write(  a.getNombre() + ";"  + a.getAltura() + ";" +  a.getPrecio() + ";" + a.getCantidad() + ";" + a.getId() +  "\n");
 	      }
 	      bw.close();
 	    
@@ -47,10 +47,8 @@ public class Persistencia {
 	
 	    try {
 	      BufferedWriter bw = new BufferedWriter(new FileWriter(florfile) );
-	
 	      for( Flor  a :  flor  ) {
-	    	  System.out.println(a.toString());
-	          bw.write(   a.getNombre() + ";" + a.getColor() + ";" + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() + "\n");
+ 	          bw.write(   a.getNombre() + ";" + a.getColor() + ";" + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() + "\n");
 	      }
 	      bw.close();
 		    
@@ -65,7 +63,6 @@ public class Persistencia {
 	      BufferedWriter bw = new BufferedWriter(new FileWriter(decoracionfile ));
 	
 	      for( Decoracion  a :  decoracion  ) {
-	    	  System.out.println(a.toString());
 		          bw.write(  a.getNombre() + ";" + a.getMaterial() + ";" + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() +  "\n");
 	      }
 	      bw.close();
@@ -98,6 +95,8 @@ public class Persistencia {
 		    
 		      }
 		    }
+		    catch (FileNotFoundException e1) {
+		    }
 		    catch (IOException ioe) {
 		      System.out.println("Se ha producido un error de lectura/escritura");
 		      System.err.println(ioe.getMessage());
@@ -119,6 +118,7 @@ public class Persistencia {
 	    	  String color  = camposlinea[1];    
 	    	  double precio =  Double.parseDouble(camposlinea[2]);    
 	    	  int  cantidad  =  Integer.parseInt(camposlinea[3]);   
+	    	  
 	    	  Flor florNueva  =   new Flor(nombre ,  precio,color, cantidad );
 	    	  florNueva.setId(Integer.parseInt(camposlinea[4]) );
 	    	  flor.add(florNueva);
@@ -126,6 +126,9 @@ public class Persistencia {
 	    
 	      }
 	    }
+	    catch (FileNotFoundException e1) {
+	    }
+	   
 	    catch (IOException ioe) {
 	      System.out.println("Se ha producido un error de lectura/escritura");
 	      System.err.println(ioe.getMessage());
@@ -156,6 +159,8 @@ public class Persistencia {
 		    
 		      }
 		    }
+		    catch (FileNotFoundException e1) {
+		    }
 		    catch (IOException ioe) {
 		      System.out.println("Se ha producido un error de lectura/escritura");
 		      System.err.println(ioe.getMessage());
@@ -169,35 +174,32 @@ public class Persistencia {
 		    List<Ticket>    listaTickets   =   new ArrayList<>();
         	List<Producto>  producto = new ArrayList<>();
 
-		    System.out.println( "Metodo leer fichero de tickets");
+ 
 		    try (
 		    	
-//	           		   System.out.println( a.getNombre() + ";"  + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() + "\n") ;	    		
 		      BufferedReader bf1 = new BufferedReader(new FileReader(listaTicketsfile))) {
 		      String linea1 = "";
-		      linea1 = bf1.readLine();	 
-		      Ticket tickeId = new Ticket(producto);
+		      Ticket ticket  = null;
 	    	  double precio 	=  0;    
 	      	  int  cantidad 	=  0;   
 	      	  int   productoId  =  0;
-		      while ( linea1 != null  ) {
+	      	  
+		      linea1 = bf1.readLine();	 
+	      	  while ( linea1 != null  ) {
 		    	  String[] camposlinea  = linea1.split(";");
-		
 		    	  String nombre = camposlinea[0];
- 
 		      	  if ( nombre.equals("Ticket") ) {
-
-		        		productoId	=  Integer.parseInt(camposlinea[1]);    
-			      		System.out.println("ticket numero " + productoId);
-			      		listaTickets.add(new Ticket( producto, productoId ));  
+//  		      		La ultima fila contiene la palabara Ticket +  Ntickect  
+		      		    productoId	=  Integer.parseInt(camposlinea[1]);   
+		      			ticket = new Ticket( producto);
+		      			ticket.setIdTicket(productoId);
+ 			      		listaTickets.add(ticket);  
 			        	producto = new ArrayList<>();
 		      	  }else {
-
-		      		  
+//                    Cada fila de entrada es una linea de detalle del ticket
 			    	  precio 	    =  Double.parseDouble(camposlinea[1]);    
 			      	  cantidad    	=  Integer.parseInt(camposlinea[2]);   
 			      	  productoId    =  Integer.parseInt(camposlinea[3]);
-			      	  System.out.println("Producto -->" + precio + "  " + cantidad + "  " +  productoId );
 			      	  Producto p  = new Producto(nombre, precio, productoId, cantidad);
 			      	  producto.add(p);
 		      	  }
@@ -207,31 +209,25 @@ public class Persistencia {
 		    
 		      }
 		    }
+		    catch (FileNotFoundException e1) {
+		    }
 		    catch (IOException ioe) {
 		      System.out.println("Se ha producido un error de lectura/escritura");
 		      System.err.println(ioe.getMessage());
 		    }
-		 
-		    
 		    return  listaTickets;
 		} 
  
 	
 	public static  void  GrabarTicket( List<Ticket>  listaticket ) {
 		 
-    	System.out.println(" grabar ticket N : "+ listaticket.size() );
 	    try {
 	        BufferedWriter bw = new BufferedWriter(new FileWriter(listaTicketsfile) );
-	
 	        for( Ticket ticket :  listaticket  ) {
-	  
 	        	List<Producto>  productos   = ticket.getProductos();
-
-	        	System.out.println("Ticket :  " + ticket.getIdTicket()  );
 	        	for( Producto a :  productos) {
 	  	        		bw.write(   a.getNombre() + ";"  + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() + "\n");
 
-	           		   System.out.println( a.getNombre() + ";"  + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() + "\n") ;
 	        	}
 	     		bw.write( "Ticket" + ";" + ticket.getIdTicket() + "\n" );       	
 	        }

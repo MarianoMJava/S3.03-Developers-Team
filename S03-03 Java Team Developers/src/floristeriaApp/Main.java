@@ -29,13 +29,11 @@ public class Main {
 		floristeria.setFlores( persistencia.LeerFlor());
 		floristeria.setDecoraciones(persistencia.LeerDecoracion());
 		comprasAntiguas  = persistencia.LeerTicket();
-
  
-
-//		System.out.println(" lista " +   listaT.a ) ;
-		
 		
 		while (!salir) {
+			System.out.println("Pulse enter para continuar");
+			String  pausa = scanner.nextLine();
 			mostrarMenu();
 			int opcion = scanner.nextInt();
 			scanner.nextLine(); // Limpiar el buffer del scanner
@@ -316,6 +314,11 @@ public class Main {
 				}
 			}
 			
+			/**
+			 * @param scanner
+			 * @param floristeria
+			 * @return
+			 */
 			public  static Ticket  crearTicketCompra(Scanner scanner, Floristeria floristeria) {
  
 				List<Producto> productosCompra = new ArrayList<>();
@@ -346,9 +349,9 @@ public class Main {
 						if ( mensajesFloristeria.getCodigoerrores() == 0 ) {
 						    productoTicket  =  floristeria.AñadirTickedProductoId(productoID, productoCantidad);
 				  			productosCompra.add(productoTicket); 
-							System.out.println("Producto aÃƒÂ±adido al carrito de compra.");
+							System.out.println("Producto añadido al carrito de compra.");
 						} else {
-							System.out.println(" Error  n : " + mensajesFloristeria.getCodigoerrores());
+							System.out.println("\nMensaje   n : " + mensajesFloristeria.getCodigoerrores());
 							System.out.println(mensajesFloristeria.getMensaje() ) ;
 						}
 					}
