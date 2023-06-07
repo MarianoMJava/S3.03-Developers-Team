@@ -15,7 +15,6 @@ public class Persistencia {
 	private static String florfile;
 	private static String decoracionfile;
 	private static String listaTicketsfile;
-	
 	private   String nombre;
 	public Persistencia(String nombre) {
 		this.nombre = nombre;
@@ -23,6 +22,7 @@ public class Persistencia {
 		this.florfile   = nombre + "flor.txt";	
 		this.decoracionfile   = nombre + "decoracion.txt";	
 		this.listaTicketsfile   = nombre + "listatikets.txt";	
+		
 	}
 
 
@@ -178,6 +178,7 @@ public class Persistencia {
 		    	
 		      BufferedReader bf1 = new BufferedReader(new FileReader(listaTicketsfile))) {
 		      String linea1 = "";
+		      String fechahoraAlta = "";
 		      Ticket ticket  = null;
 	    	  double precio 	=  0;    
 	      	  int  cantidad 	=  0;   
@@ -190,8 +191,10 @@ public class Persistencia {
 		      	  if ( nombre.equals("Ticket") ) {
 //  		      		La ultima fila contiene la palabara Ticket +  Ntickect  
 		      		    productoId	=  Integer.parseInt(camposlinea[1]);   
+		      		    fechahoraAlta	=  camposlinea[2]; 
 		      			ticket = new Ticket( producto);
 		      			ticket.setIdTicket(productoId);
+		      			ticket.setFechaHoraAlta(fechahoraAlta);
  			      		listaTickets.add(ticket);  
 			        	producto = new ArrayList<>();
 		      	  }else {
@@ -229,7 +232,7 @@ public class Persistencia {
 	  	        		bw.write(   a.getNombre() + ";"  + a.getPrecio() +  ";" + a.getCantidad() +  ";" +  a.getId() + "\n");
 
 	        	}
-	     		bw.write( "Ticket" + ";" + ticket.getIdTicket() + "\n" );       	
+	     		bw.write( "Ticket" + ";" + ticket.getIdTicket() + ";" + ticket.getFechaHoraAlta() + "\n" );       	
 	        }
 	        bw.close();
 	  	    
@@ -238,5 +241,5 @@ public class Persistencia {
 	  	      System.err.println(ioe.getMessage());
 	     }
 	}
-	
-	}
+
+	}	

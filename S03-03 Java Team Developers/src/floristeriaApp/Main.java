@@ -1,19 +1,23 @@
 package floristeriaApp;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
- 
+	
 	
 	static  List<Ticket> comprasAntiguas = new ArrayList<>();
 	public static void main(String[] args) {
+		System.out.	println("------Inciando Floristeria 3.0 ---------  ");
 
-		System.out.println("Iniciando Bienvenido. Finde  ");
+		System.out.	println("Introduzca el nombre de la floristeria :  ");
 		Scanner scanner = new Scanner(System.in);
-		
+		   
 		Floristeria floristeria = crearCargarFloristeria(scanner);
 		boolean salir = false;
 		System.out.println( floristeria.getNombre());
@@ -79,17 +83,14 @@ public class Main {
 						mostrarGananciasTotales(comprasAntiguas);
 						break;
 					case 13:
-//					SerializarGuardar.serializar(floristeria);
-//				floristeria = crearCargarFloristeria(scanner);
-						
-						
+
 						persistencia.GrabarArbol(floristeria.getArboles());
 						persistencia.GrabarFlor(floristeria.getFlores());
 						persistencia.GrabarDecoracion(floristeria.getDecoraciones());
 						persistencia.GrabarTicket(comprasAntiguas);
 						
 						break;
-					case 14:
+ 					case 14:
 						salir = true;
 						System.out.println("Saliendo...");
 						break;
@@ -120,7 +121,7 @@ public class Main {
         System.out.println("11. Mostrar Compras Antiguas");
         System.out.println("12. Mostrar Ganancias Totales");
         System.out.println("13. Guardar (Para registrar cambios y cambiar de floristeria)");
-        System.out.println("14. Salir");
+        System.out.println("14. Salir)");
         System.out.println("Elige una opcion: ");
     }
 			
@@ -148,8 +149,7 @@ public class Main {
             return floristeria;
 
     }
-	
-			
+ 
 			private static void agregarArbol(Scanner scanner, Floristeria floristeria) {
 				
 				if (floristeria == null) {
@@ -249,7 +249,7 @@ public class Main {
 				
 				floristeria.retirarArbol(idRetirar);
 				
-				SerializarGuardar.serializar(floristeria);
+//				SerializarGuardar.serializar(floristeria);
 				
 			}
 			
@@ -262,7 +262,7 @@ public class Main {
 				
 				floristeria.retirarFlor(idRetirar);
 				
-				SerializarGuardar.serializar(floristeria);
+//				SerializarGuardar.serializar(floristeria);
 				
 			}
 			
@@ -275,7 +275,7 @@ public class Main {
 				
 				floristeria.retirarDecoracion(idRetirar);
 				
-				SerializarGuardar.serializar(floristeria);
+//				SerializarGuardar.serializar(floristeria);
 			}
 			
 			private static void mostrarStockConCantidades(Floristeria floristeria) {
@@ -343,8 +343,14 @@ public class Main {
 					}
 				}
 
+	 
+		LocalDateTime myDateObj = LocalDateTime.now();
+   	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+ 	    String formattedDate = myDateObj.format(myFormatObj);
+	 
 		Ticket ticket = new Ticket(productosCompra);
- 
+		ticket.setFechaHoraAlta( formattedDate.toString());
+
 		System.out.println("Ticket de compra:");
 		ticket.mostrarTicket();
 		return ticket;
