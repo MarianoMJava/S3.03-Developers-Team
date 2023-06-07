@@ -6,26 +6,24 @@ public class Ticket {
 	
 
 	private List<Producto> productos;
-	private static int nroTicket;
+	private static int nroTicket = 0;
 	private int IdTicket;
+	
+	public Ticket(List<Producto> productos) {
+        this.productos = productos;
+        IdTicket = generarNroTicket();
+    }	
+	public Ticket(List<Producto> productos, int Id) {
+        this.productos = productos;
+        IdTicket = Id;
+    }
 	public int getIdTicket() {
 		return IdTicket;
 	}
 	public void setIdTicket(int idTicket) {
 		IdTicket = idTicket;
-	}
+	};
 
-;
-
-	public Ticket(List<Producto> productos) {
-        this.productos = productos;
-        Ticket.nroTicket += 1;
-        IdTicket = nroTicket;
-    }
-	public Ticket(List<Producto> productos, int Id) {
-        this.productos = productos;
-        IdTicket = Id;
-    }
 	public List<Producto> getProductos() {
 		return productos;
 	}
@@ -41,6 +39,9 @@ public class Ticket {
 	public static void setNroTicket(int nroTicket) {
 		Ticket.nroTicket = nroTicket;
 	}
+    private static synchronized int generarNroTicket(){
+        return    Ticket.nroTicket += 1;
+    }
 
     public void mostrarTicket() {
         System.out.println("Ticket de compra numero " + this.IdTicket +":");
@@ -53,7 +54,7 @@ public class Ticket {
     public double calcularTotal() {
         double total = 0;
         for (Producto producto : productos) {
-            total += producto.getPrecio();
+            total += producto.getPrecio() * producto.getCantidad();
         }
         return total;
     }
