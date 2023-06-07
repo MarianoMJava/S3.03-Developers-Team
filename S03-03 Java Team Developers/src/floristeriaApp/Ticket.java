@@ -8,7 +8,8 @@ public class Ticket {
 	private List<Producto> productos;
 	private static int nroTicket = 0;
 	private int IdTicket;
-	
+	private String fechaHoraAlta;
+
 	public Ticket(List<Producto> productos) {
         this.productos = productos;
         IdTicket = generarNroTicket();
@@ -42,9 +43,14 @@ public class Ticket {
     private static synchronized int generarNroTicket(){
         return    Ticket.nroTicket += 1;
     }
-
+	public String getFechaHoraAlta() {
+		return fechaHoraAlta;
+	}
+	public void setFechaHoraAlta(String fechaAlta) {
+		this.fechaHoraAlta = fechaAlta;
+	}
     public void mostrarTicket() {
-        System.out.println("Ticket de compra numero " + this.IdTicket +":");
+        System.out.println("Ticket de compra numero " + this.IdTicket + " ,  fecha alta "+ this.fechaHoraAlta);
         for (Producto producto : productos) {
             System.out.println(producto.getNombre() + " - Precio: " + producto.getPrecio() + " - Cantidad " + producto.getCantidad() );
         }
