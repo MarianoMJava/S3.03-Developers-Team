@@ -1,7 +1,5 @@
 package floristeriaApp;
 
-import java.io.Serializable;
-
 public class Flor extends Producto{
 
 	   private String color;
