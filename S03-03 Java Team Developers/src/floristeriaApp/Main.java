@@ -317,6 +317,9 @@ public class Main {
 				mensajesFloristeria.setCodigoerrores(0);
 				mensajesFloristeria.setMensaje("");
 				while (agregarProductos) {
+
+					mostrarStock(floristeria);
+
 					System.out.println("Introduce el ID del producto a comprar ( 0 para finalizar): ");
 					System.out.println("Id del producto: ");
 					productoID = scanner.nextInt();

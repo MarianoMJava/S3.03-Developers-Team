@@ -11,12 +11,19 @@ public class ComprobarExistencia {
 
 		try {
 			File myTxt = new File(nombre + ".txt");
-			
+
 			if (myTxt.createNewFile()) {
 				
 				System.out.println("Fichero creado " + myTxt.getName());
-				
-				
+
+				File myTxtarbol = new File(nombre + "arbol.txt");
+				File myTxtflor = new File(nombre + "flor.txt");
+				File myTxtdecoracion = new File(nombre + "decoracion.txt");
+
+				myTxtarbol.createNewFile();
+				myTxtflor.createNewFile();
+				myTxtdecoracion.createNewFile();
+
 			} else {
 				
 				existeFloristeria = true;
