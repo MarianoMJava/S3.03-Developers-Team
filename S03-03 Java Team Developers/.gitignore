@@ -1,0 +1,8 @@
+/*.class
+.settings
+/target
+.classpath
+.project
+/bin
+/S3.03-Developers-Team/S03-03 Java Team Developers/bin
+*.txt
