@@ -1,4 +1,4 @@
-package floristeriaApp;
+package mariano.floristeria.persistencia.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,6 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import mariano.floristeria.beans.Arbol;
+import mariano.floristeria.beans.Decoracion;
+import mariano.floristeria.beans.Flor;
+import mariano.floristeria.beans.Producto;
+import mariano.floristeria.beans.Ticket;
 
 
 public class Persistencia {
@@ -26,7 +32,7 @@ public class Persistencia {
 	}
 
 
-	  public static void GrabarArbol( List<Arbol>  arbol ) {
+	  public  void GrabarArbol( List<Arbol>  arbol ) {
 	
 	    try {
 	      BufferedWriter bw = new BufferedWriter(new FileWriter(arbolfile) );

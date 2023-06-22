@@ -1,10 +1,16 @@
-package floristeriaApp;
+package mariano.floristeria.proceso;
 
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import mariano.floristeria.beans.Arbol;
+import mariano.floristeria.beans.Decoracion;
+import mariano.floristeria.beans.Flor;
+import mariano.floristeria.beans.Producto;
+import mariano.floristeria.beans.Ticket;
 
 public class Floristeria implements Serializable {
     private List<Arbol> arboles;

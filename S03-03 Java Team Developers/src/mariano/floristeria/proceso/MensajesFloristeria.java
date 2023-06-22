@@ -1,4 +1,4 @@
-package floristeriaApp;
+package mariano.floristeria.proceso;
 
 public class MensajesFloristeria {
 	private String mensaje = "";

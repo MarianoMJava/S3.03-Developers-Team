@@ -1,4 +1,4 @@
-package floristeriaApp;
+package mariano.floristeria.beans;
 
 public class Flor extends Producto{
 

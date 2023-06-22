@@ -1,38 +1,79 @@
-package floristeriaApp;
+package mariano.floristeria.main;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
+ 
+import mariano.floristeria.beans.Arbol;
+import mariano.floristeria.beans.Decoracion;
+import mariano.floristeria.beans.Flor;
+import mariano.floristeria.beans.Producto;
+import mariano.floristeria.beans.Ticket;
+import mariano.floristeria.persistencia.mysqJdbc.*;
+import mariano.floristeria.persistencia.service.*;
+import mariano.floristeria.proceso.ComprobarExistencia;
+import mariano.floristeria.proceso.Floristeria;
+import mariano.floristeria.proceso.MensajesFloristeria;
+import mariano.floristeria.persistencia.mysqJdbc.ContextJDBC;
+import mariano.floristeria.persistencia.mysqJdbc.*;
 public class Main {
 	
 	
 	static  List<Ticket> comprasAntiguas = new ArrayList<>();
-	public static void main(String[] args) {
-		System.out.	println("------Inciando Floristeria 3.0 ---------  ");
+	
+
+	
+	public static void main(String[] args) throws IOException {
+		
+		System.out.	println("------Iniciando Floristeria  3.0 ---------  ");
 
 		System.out.	println("Introduzca el nombre de la floristeria :  ");
 		Scanner scanner = new Scanner(System.in);
 		   
 		Floristeria floristeria = crearCargarFloristeria(scanner);
 		boolean salir = false;
-		System.out.println( floristeria.getNombre());
+		System.out.println( floristeria.getNombre() );
+
+ 
+		ConfiguracionPropiedades  configuracionpropiedades = new ConfiguracionPropiedades();
+
+		try {
+			  configuracionpropiedades.LeePropiedades("Config.properties");
+		}
+		catch (IOException  e) {
+			// TODO: handle exception
+			System.out.println( "error propiedades " + e.getMessage());
+		}
+			
+ 	  	//
+		// Cargamos la aplicacion segun la persistencia 
 		//
-		// Declararamos Objecto persitencia lectura/escritura   ficheros
-		//
-		Persistencia  persistencia = new Persistencia( floristeria.getNombre() );
+		Persistencia  persistencia = null;
+		PersistenciaJDBC  persistenciaMysql  = null;
 
 		// Leemos los arboles creados en el fichero  y lo inyectamos en la floristeria
-
-		floristeria.setArboles( persistencia.LeerArbol());
-		floristeria.setFlores( persistencia.LeerFlor());
-		floristeria.setDecoraciones(persistencia.LeerDecoracion());
-		comprasAntiguas  = persistencia.LeerTicket();
+		if (configuracionpropiedades.getPersistencia().equals("fichero") ) {
+			persistencia = new Persistencia( floristeria.getNombre() );
+			floristeria.setArboles( persistencia.LeerArbol());
+			floristeria.setFlores( persistencia.LeerFlor());
+			floristeria.setDecoraciones(persistencia.LeerDecoracion());
+			comprasAntiguas  = persistencia.LeerTicket();
+		}
+		if (configuracionpropiedades.getPersistencia().equals("mysql") ) {
+			persistenciaMysql = new PersistenciaJDBC( configuracionpropiedades.ConectionDBMysql()  , floristeria.getNombre() );
  
+			floristeria.setArboles( persistenciaMysql.LeerArbol());
+//			floristeria.setFlores( persistencia.LeerFlor());
+//			floristeria.setDecoraciones(persistencia.LeerDecoracion());
+//			comprasAntiguas  = persistencia.LeerTicket();
+		}		
 		
 		while (!salir) {
 			System.out.println("Pulse enter para continuar");
@@ -84,11 +125,26 @@ public class Main {
 						break;
 					case 13:
 
-						persistencia.GrabarArbol(floristeria.getArboles());
-						persistencia.GrabarFlor(floristeria.getFlores());
-						persistencia.GrabarDecoracion(floristeria.getDecoraciones());
-						persistencia.GrabarTicket(comprasAntiguas);
-						
+						switch(configuracionpropiedades.getPersistencia() ) {
+						  case "ficheros":
+								guardarfloristeriaFile(persistencia , floristeria);
+
+						    break;
+						  case "mysql":
+						    // code block
+							  
+							  
+   							    persistenciaMysql.GrabarArbol(floristeria.getArboles());
+//								persistencia.GrabarFlor(floristeria.getFlores());
+//								persistencia.GrabarDecoracion(floristeria.getDecoraciones());
+//								persistencia.GrabarTicket(comprasAntiguas);  
+							  
+							  
+							  
+						    break;
+						  default:
+						    // code block
+						}
 						break;
  					case 14:
 						salir = true;
@@ -102,7 +158,10 @@ public class Main {
 					
 				}
 				scanner.close();
-			}
+
+		
+
+	}
 			
 			
     private static void mostrarMenu() {
@@ -150,7 +209,9 @@ public class Main {
 
     }
  
-			private static void agregarArbol(Scanner scanner, Floristeria floristeria) {
+//			private static void agregarArbol(Scanner scanner, Floristeria floristeria) {
+
+				public static  void agregarArbol(Scanner scanner , Floristeria floristeria) {
 				
 				if (floristeria == null) {
 					System.out.println("Por favor, primero indicar floristeria o crearla: ");
@@ -159,7 +220,13 @@ public class Main {
 				}
 				
 				System.out.println("Introduce el nombre del ÃƒÂ¡rbol: ");
-				String nombre = scanner.nextLine();
+				String nombre = "";
+				try {
+					nombre = scanner.nextLine();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				System.out.println("Introduce el precio del ÃƒÂ¡rbol: ");
 				double precio = scanner.nextDouble();
@@ -377,4 +444,12 @@ public class Main {
 
 		System.out.println("Ganancias totales: " + gananciasTotales);
 	}
+	public static  void guardarfloristeriaFile(Persistencia persistencia, Floristeria floristeria ){
+ 
+				persistencia.GrabarArbol(floristeria.getArboles());
+				persistencia.GrabarFlor(floristeria.getFlores());
+				persistencia.GrabarDecoracion(floristeria.getDecoraciones());
+				persistencia.GrabarTicket(comprasAntiguas);  
+	}
+	
 }

@@ -1,4 +1,4 @@
-package floristeriaApp;
+package mariano.floristeria.beans;
 
 import java.io.Serializable;
 
